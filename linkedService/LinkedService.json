@@ -1,0 +1,18 @@
+{
+	"name": "LinkedService",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AKVLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "Azureuser"
+			}
+		}
+	}
+}

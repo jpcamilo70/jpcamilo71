@@ -1,0 +1,37 @@
+{
+	"name": "SourceDatasetBlobDog",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDataCopy",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Others"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "dog.txt",
+				"folderPath": "sqldog",
+				"container": "sql4dog"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "FirstDogName",
+				"type": "String"
+			},
+			{
+				"name": "LastDogName",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

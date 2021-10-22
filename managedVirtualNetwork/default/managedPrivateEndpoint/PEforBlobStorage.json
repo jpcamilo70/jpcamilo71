@@ -1,0 +1,10 @@
+{
+	"name": "PEforBlobStorage",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/8015c88d-4cf5-4440-8891-416255ee8f4d/resourceGroups/ADF/providers/Microsoft.Storage/storageAccounts/adfstoragecamilo",
+		"groupId": "blob",
+		"fqdns": [
+			"adfstoragecamilo.blob.core.windows.net"
+		]
+	}
+}

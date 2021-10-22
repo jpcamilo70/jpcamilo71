@@ -1,0 +1,30 @@
+{
+	"name": "DestinationDinarySink4compressedfilesadinamically",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DestinationDinarySink4compressedfilesadinamically",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"FIlename": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Others"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "csvdestination"
+			},
+			"compression": {
+				"type": "ZipDeflate",
+				"level": "Optimal"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

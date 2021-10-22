@@ -1,0 +1,23 @@
+{
+	"name": "SourceBinaryDS4compressfilesdynamically",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LikedServiceforSourceBlobCompressMfies",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Others"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "*.csv",
+				"folderPath": "source",
+				"container": "csvsource"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

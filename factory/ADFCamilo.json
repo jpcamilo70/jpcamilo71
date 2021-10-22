@@ -1,0 +1,9 @@
+{
+	"name": "ADFCamilo",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "aa038f37-876c-4711-844b-d00f35fec6ce",
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+	}
+}

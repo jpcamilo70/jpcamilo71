@@ -1,0 +1,151 @@
+{
+	"name": "MailPipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "BlobtoBlobmail",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SinkBlobDatasetMail",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "SendSuccessEmailActivity",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "BlobtoBlobmail",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-253.westeurope.logic.azure.com:443/workflows/18d3fe3f12cc4b9e9f5dc94dd791540c/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=HdX7umb7kgVNmnsu8fFxlLKQwCPvyZD6TLXRKw9m-nE",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": {
+						"message": "@{activity('Copy1').output.dataWritten}",
+						"dataFactoryName": "@{pipeline().DataFactory}",
+						"pipelineName": "@{pipeline().Pipeline}",
+						"receiver": "@pipeline().parameters.receiver"
+					}
+				}
+			},
+			{
+				"name": "SendFailureEmailActivity",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "BlobtoBlobmail",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-175.westeurope.logic.azure.com:443/workflows/ca031bbeadc74558be90cd66ec7b3fb6/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=eV9EOnxa4GfHvElDfpouvwyf3qMNLOU0GMfDrvuMa2E",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": {
+						"message": "@{activity('Copy1').error.message}",
+						"dataFactoryName": "@{pipeline().DataFactory}",
+						"pipelineName": "@{pipeline().Pipeline}",
+						"receiver": "@pipeline().parameters.receiver"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"sourceBlobContainer": {
+				"type": "string",
+				"defaultValue": "adftutorial/adfv2branch/input"
+			},
+			"sinkBlobContainer": {
+				"type": "string",
+				"defaultValue": "adftutorial/adfv2branch/output"
+			},
+			"receiver": {
+				"type": "string",
+				"defaultValue": "jocamilo@microsoft.com"
+			}
+		},
+		"folder": {
+			"name": "Several"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-10-14T15:44:35Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,10 @@
+{
+	"name": "MyAzureKeyvaultPE",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/8015c88d-4cf5-4440-8891-416255ee8f4d/resourceGroups/ADF/providers/Microsoft.KeyVault/vaults/ADFKeyVaultCamilo",
+		"groupId": "vault",
+		"fqdns": [
+			"adfkeyvaultcamilo.vaultcore.azure.net"
+		]
+	}
+}

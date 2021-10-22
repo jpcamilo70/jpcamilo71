@@ -1,0 +1,23 @@
+{
+	"name": "BlobwithKVandPE",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AKVLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "ADFCamilo",
+				"secretVersion": "a214fa6b65fd4223a6a14e71eb5a5d8a"
+			}
+		},
+		"connectVia": {
+			"referenceName": "WithVNEt",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

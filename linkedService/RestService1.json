@@ -1,0 +1,13 @@
+{
+	"name": "RestService1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://management.azure.com/subscriptions/8015c88d-4cf5-4440-8891-416255ee8f4d/providers/Microsoft.DataFactory/factories?api-version=2018-06-01",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
