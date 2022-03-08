@@ -1,9 +1,0 @@
-{
-	"name": "ADFwithGithub",
-	"location": "westeurope",
-	"identity": {
-		"type": "SystemAssigned",
-		"principalId": "356453e4-4fad-4c5f-9348-d78c14634120",
-		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
-	}
-}
